@@ -1,18 +1,18 @@
 package ejava.week03ca.rest;
 
+import ejava.week03ca.task.FindAppointmentTask;
 import ejava.week03ca.business.AppointmentBean;
-import ejava.week03ca.model.Appointment;
-import java.util.List;
+import javax.annotation.Resource;
 import javax.ejb.EJB;
+import javax.enterprise.concurrent.ManagedExecutorService;
 import javax.enterprise.context.RequestScoped;
-import javax.json.Json;
-import javax.json.JsonArrayBuilder;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.container.AsyncResponse;
+import javax.ws.rs.container.Suspended;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 @RequestScoped
 @Path("/appointment")
@@ -20,23 +20,20 @@ public class AppointmentResource {
     
     @EJB private AppointmentBean appointmentBean;
     
+    @Resource(mappedName = "concurrent/appointmentThreadPool")
+    private ManagedExecutorService executors;
+    
     @GET
     @Path("{email}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response get(@PathParam("email") String email) {
-        List<Appointment> apt = appointmentBean.getByEmail(email);
+    public void get(@PathParam("email") String email, 
+            @Suspended AsyncResponse async) {
         
-        if (apt.isEmpty()) {
-            return (Response.status(Response.Status.NOT_FOUND)
-            .build());
-        }
-
-        JsonArrayBuilder arrBuilder = Json.createArrayBuilder();
-        for (Appointment a : apt) {
-            arrBuilder.add(a.toJSON());
-        }
+        FindAppointmentTask task = new FindAppointmentTask();
+        task.setSearchCrietria(email, appointmentBean);
+        task.setAsyncResponse(async);
         
-        return (Response.ok(arrBuilder.build()).build());
+        executors.execute(task);
     }
     
 }

@@ -1,6 +1,8 @@
 package ejava.week03ca.model;
 
 import java.util.Date;
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -49,6 +51,15 @@ public class Appointment {
     }
     public void setPeople(People people) {
         this.people = people;
-    } 
+    }
+    
+    public JsonObject toJSON() {        
+        return (Json.createObjectBuilder()
+                .add("appointmentId", appointmentId)
+                .add("dateTime", appointmentDate.toString())
+                .add("description", description)
+                .add("personId", people.getPeopleId())
+                .build());
+    }
     
 }

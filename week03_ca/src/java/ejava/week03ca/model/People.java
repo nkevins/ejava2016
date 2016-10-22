@@ -11,7 +11,7 @@ public class People {
     
     @Id
     @Column(name = "pid")
-    private Integer peopleId;
+    private String peopleId;
     
     private String name;
     private String email;
@@ -19,10 +19,10 @@ public class People {
     @OneToMany(mappedBy = "people")
     private List<Appointment> appointments;
 
-    public Integer getPeopleId() {
+    public String getPeopleId() {
         return peopleId;
     }
-    public void setPeopleId(Integer peopleId) {
+    public void setPeopleId(String peopleId) {
         this.peopleId = peopleId;
     }
 

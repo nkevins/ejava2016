@@ -1,13 +1,17 @@
 package ejava.week03ca.model;
 
+import java.io.Serializable;
 import java.util.List;
+import java.util.UUID;
+import javax.inject.Named;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class People {
+public class People implements Serializable {
+    private static final long serialVersionUID = 1L;
     
     @Id
     @Column(name = "pid")
@@ -47,4 +51,11 @@ public class People {
         this.appointments = appointments;
     }
     
+    public People setPeople(String name, String email){
+        People p = new People();
+        p.setName(name);
+        p.setEmail(email);
+        p.setPeopleId(UUID.randomUUID().toString().substring(0, 8));
+        return p;
+    }
 }

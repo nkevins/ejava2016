@@ -30,7 +30,7 @@ public class PeopleTask implements Runnable{
          JsonObject json = Json.createObjectBuilder()
                 .add("name", p.getName())
                 .add("email", p.getEmail())
-                 .add("personId",p.getPeopleId() )
+                 .add("personId",p.getPersonId() )
                 .build();
         System.out.println(String.format(">> name: %s, email: %s", p.getName(), p.getEmail()));
         async.resume(Response.status(Response.Status.CREATED)

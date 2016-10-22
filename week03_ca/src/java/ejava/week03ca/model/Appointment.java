@@ -58,7 +58,7 @@ public class Appointment {
                 .add("appointmentId", appointmentId)
                 .add("dateTime", appointmentDate.getTime())
                 .add("description", description)
-                .add("personId", people.getPeopleId())
+                .add("personId", people.getPersonId())
                 .build());
     }
     

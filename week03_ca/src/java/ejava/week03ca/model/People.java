@@ -16,7 +16,7 @@ public class People implements Serializable {
     
     @Id
     @Column(name = "pid")
-    private String peopleId;
+    private String personId;
     
     private String name;
     private String email;
@@ -24,11 +24,11 @@ public class People implements Serializable {
     @OneToMany(mappedBy = "people")
     private List<Appointment> appointments;
 
-    public String getPeopleId() {
-        return peopleId;
+    public String getPersonId() {
+        return personId;
     }
-    public void setPeopleId(String peopleId) {
-        this.peopleId = peopleId;
+    public void setPersonId(String personId) {
+        this.personId = personId;
     }
 
     public String getName() {
@@ -56,7 +56,7 @@ public class People implements Serializable {
         People p = new People();
         p.setName(name);
         p.setEmail(email);
-        p.setPeopleId(UUID.randomUUID().toString().substring(0, 8));
+        p.setPersonId(UUID.randomUUID().toString().substring(0, 8));
         return p;
     }
     

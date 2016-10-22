@@ -26,7 +26,7 @@ public class AppointmentResource {
     public Response get(@PathParam("email") String email) {
         List<Appointment> apt = appointmentBean.getByEmail(email);
         
-        if (apt.size() == 0) {
+        if (apt.isEmpty()) {
             return (Response.status(Response.Status.NOT_FOUND)
             .build());
         }

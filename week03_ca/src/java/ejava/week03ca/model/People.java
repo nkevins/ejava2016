@@ -3,7 +3,6 @@ package ejava.week03ca.model;
 import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
-import javax.inject.Named;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.persistence.Column;

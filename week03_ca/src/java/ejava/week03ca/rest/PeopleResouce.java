@@ -8,15 +8,11 @@ package ejava.week03ca.rest;
 import ejava.week03ca.task.PeopleTask;
 import ejava.week03ca.business.PeopleBean;
 import ejava.week03ca.model.People;
-import java.util.Optional;
+import ejava.week03ca.task.FindPeopleTask;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.enterprise.concurrent.ManagedExecutorService;
 import javax.enterprise.context.RequestScoped;
-import javax.json.Json;
-import javax.json.JsonObject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -27,7 +23,6 @@ import javax.ws.rs.container.AsyncResponse;
 import javax.ws.rs.container.Suspended;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
-import javax.ws.rs.core.Response;
 
 /**
  *
@@ -39,7 +34,6 @@ public class PeopleResouce {
     
     @EJB private PeopleBean peopleBean;
     People people = new People();
-    @PersistenceContext private EntityManager em;
      
     @Resource (mappedName="concurrent/appointmentThreadPool")
     private ManagedExecutorService executors;
@@ -59,17 +53,12 @@ public class PeopleResouce {
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getPeople(@QueryParam("email") String email) {
-        
-        Optional<People> people = peopleBean.getByEmail(email);
-        
-        if (people.isPresent()) {
-            People p = people.get();
-            return Response.ok(p.toJSON()).build();
-        }
-        
-        return (Response.status(Response.Status.NOT_FOUND)
-            .build());
+    public void getPeople(@QueryParam("email") String email, @Suspended AsyncResponse async) {
+       
+        FindPeopleTask findPpl = new FindPeopleTask();
+        findPpl.setSearchCriteria(email, peopleBean);
+        findPpl.setAsyncResponse(async);
+        executors.execute(findPpl);
     }
     
 }

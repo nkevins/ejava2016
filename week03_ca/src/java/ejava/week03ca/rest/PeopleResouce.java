@@ -7,11 +7,8 @@ package ejava.week03ca.rest;
 
 import ejava.week03ca.business.PeopleBean;
 import ejava.week03ca.model.People;
-import java.util.UUID;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.ws.rs.Consumes;

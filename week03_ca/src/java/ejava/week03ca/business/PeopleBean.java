@@ -6,6 +6,7 @@
 package ejava.week03ca.business;
 
 import ejava.week03ca.model.People;
+import java.util.List;
 import java.util.Optional;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -29,6 +30,11 @@ public class PeopleBean {
         TypedQuery<People> query = em.createQuery(queryString, People.class);
         query.setParameter("email", email);
         
-        return (Optional.ofNullable(query.getSingleResult()));
+        List<People> people = query.getResultList();
+        if (people.isEmpty()) {
+            return Optional.empty();
+        } else {
+            return (Optional.ofNullable(people.get(0)));
+        }
     }
 }

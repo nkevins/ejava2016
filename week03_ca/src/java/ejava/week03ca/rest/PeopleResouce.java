@@ -5,7 +5,7 @@
  */
 package ejava.week03ca.rest;
 
-import ejava.week03a.task.PeopleTask;
+import ejava.week03ca.task.PeopleTask;
 import ejava.week03ca.business.PeopleBean;
 import ejava.week03ca.model.People;
 import java.util.Optional;

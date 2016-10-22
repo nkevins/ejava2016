@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ejava.week03a.task;
+package ejava.week03ca.task;
 
+import ejava.week03a.task.*;
 import ejava.week03ca.rest.*;
 import ejava.week03ca.business.PeopleBean;
 import ejava.week03ca.model.People;

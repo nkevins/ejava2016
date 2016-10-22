@@ -5,11 +5,8 @@
  */
 package ejava.week03ca.task;
 
-import ejava.week03a.task.*;
-import ejava.week03ca.rest.*;
 import ejava.week03ca.business.PeopleBean;
 import ejava.week03ca.model.People;
-import java.math.BigDecimal;
 import javax.ws.rs.container.AsyncResponse;
 import javax.json.Json;
 import javax.json.JsonObject;

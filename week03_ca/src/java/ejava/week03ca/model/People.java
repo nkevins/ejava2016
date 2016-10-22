@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 import javax.inject.Named;
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -58,4 +60,12 @@ public class People implements Serializable {
         p.setPeopleId(UUID.randomUUID().toString().substring(0, 8));
         return p;
     }
+    
+    public JsonObject toJSON() {        
+        return (Json.createObjectBuilder()
+                .add("name", name)
+                .add("email", email)
+                .build());
+    }
+    
 }

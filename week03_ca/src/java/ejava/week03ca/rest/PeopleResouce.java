@@ -7,6 +7,7 @@ package ejava.week03ca.rest;
 
 import ejava.week03ca.business.PeopleBean;
 import ejava.week03ca.model.People;
+import java.util.Optional;
 import java.util.UUID;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -15,9 +16,11 @@ import javax.inject.Named;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
@@ -53,6 +56,21 @@ public class PeopleResouce {
         return (Response.status(Response.Status.CREATED)
 				.entity(json)
 				.build());
+    }
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPeople(@QueryParam("email") String email) {
+        
+        Optional<People> people = peopleBean.getByEmail(email);
+        
+        if (people.isPresent()) {
+            People p = people.get();
+            return Response.ok(p.toJSON()).build();
+        }
+        
+        return (Response.status(Response.Status.NOT_FOUND)
+            .build());
     }
     
 }

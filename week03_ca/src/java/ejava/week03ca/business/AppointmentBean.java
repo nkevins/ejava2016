@@ -1,18 +1,24 @@
 package ejava.week03ca.business;
 
 import ejava.week03ca.model.Appointment;
-import java.util.Optional;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 @Stateless
 public class AppointmentBean {
     
     @PersistenceContext private EntityManager em;
     
-    public Optional<Appointment> getById(int id) {
-        return Optional.ofNullable(em.find(Appointment.class, id));
+    public List<Appointment> getByEmail(String email) {
+        String queryString = "select a from People p "
+                + "join p.appointments a where (p.email = :email)";
+        TypedQuery<Appointment> query = em.createQuery(queryString, Appointment.class);
+        query.setParameter("email", email);
+        
+        return query.getResultList();
     }
     
 }

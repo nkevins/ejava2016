@@ -56,7 +56,7 @@ public class Appointment {
     public JsonObject toJSON() {        
         return (Json.createObjectBuilder()
                 .add("appointmentId", appointmentId)
-                .add("dateTime", appointmentDate.toString())
+                .add("dateTime", appointmentDate.getTime())
                 .add("description", description)
                 .add("personId", people.getPeopleId())
                 .build());

@@ -26,17 +26,13 @@ public class FindAppointmentTask implements Runnable {
     @Override
     public void run() {
         List<Appointment> apt = appointmentBean.getByEmail(email);
+        JsonArrayBuilder arrBuilder = Json.createArrayBuilder();
         
-        if (apt.isEmpty()) {
-            async.resume(Response.status(Response.Status.NOT_FOUND).build());
-        } else {
-            JsonArrayBuilder arrBuilder = Json.createArrayBuilder();
-            for (Appointment a : apt) {
-                arrBuilder.add(a.toJSON());
-            }
-
-            async.resume(Response.ok(arrBuilder.build()).build());
-        }        
+        for (Appointment a : apt) {
+            arrBuilder.add(a.toJSON());
+        }
+        
+        async.resume(Response.ok(arrBuilder.build()).build());       
     }
     
 }

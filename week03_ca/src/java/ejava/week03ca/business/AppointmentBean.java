@@ -12,6 +12,10 @@ public class AppointmentBean {
     
     @PersistenceContext private EntityManager em;
     
+    public void save(Appointment apt) {
+        em.persist(apt);
+    }
+    
     public List<Appointment> getByEmail(String email) {
         String queryString = "select a from People p "
                 + "join p.appointments a where (p.email = :email)";

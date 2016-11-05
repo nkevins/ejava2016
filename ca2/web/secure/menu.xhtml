@@ -6,8 +6,12 @@
         <title>Menu</title>
     </h:head>
     <h:body>
-        <h1>Menu</h1>
+        <h1>Notice Board Manager Menu</h1>
+        <h:outputText value="Hello, #{userSession.username}" />
         <hr />
+        <h:panelGrid columns="1">
+            <h:link value="Create Note" outcome="createNote" />
+        </h:panelGrid>
     </h:body>
 </html>
 

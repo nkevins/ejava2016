@@ -7,27 +7,21 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  *
  * @author andy
  */
 @Entity
-@Table(name="users")
-public class User implements Serializable{
-    
-     private static final long serialVersionUID = 1L;
-     
-     @Id
-     private String userid;
-     private String password;
-     
-     @OneToMany(mappedBy = "note")
+@Table(name = "users")
+public class User implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    private String userid;
+    private String password;
+
+    @OneToMany(mappedBy = "user")
     private List<Note> notes;
 
     public String getUserid() {
@@ -51,6 +45,6 @@ public class User implements Serializable{
     }
     public void setNotes(List<Note> notes) {
         this.notes = notes;
-    }    
-     
+    }
+
 }

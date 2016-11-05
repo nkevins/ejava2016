@@ -1,3 +1,4 @@
+package ca2.model;
 
 import java.io.Serializable;
 import javax.persistence.Entity;

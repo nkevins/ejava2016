@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
@@ -13,14 +15,21 @@ import javax.persistence.Temporal;
 @Table(name="notes")
 public class Note implements Serializable {
     
+    private static final long serialVersionUID = 1L;
+    
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer noteId;
     
     private String title;
     private String category;
     private String content;
+    
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date createdDate;
+    
+    @ManyToOne
+    @JoinColumn(name = "userid", referencedColumnName = "userid")
+    private User user;
 
     public Integer getNoteId() {
         return noteId;
@@ -55,6 +64,13 @@ public class Note implements Serializable {
     }
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
+    }
+
+    public User getUser() {
+        return user;
+    }
+    public void setUser(User user) {
+        this.user = user;
     }
     
 }

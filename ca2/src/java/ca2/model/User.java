@@ -1,7 +1,11 @@
 package ca2.model;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -14,12 +18,17 @@ import javax.persistence.Entity;
  * @author andy
  */
 @Entity
-public class Users implements Serializable{
+@Table(name="users")
+public class User implements Serializable{
     
      private static final long serialVersionUID = 1L;
      
+     @Id
      private String userid;
      private String password;
+     
+     @OneToMany(mappedBy = "note")
+    private List<Note> notes;
 
     public String getUserid() {
         return userid;
@@ -36,7 +45,12 @@ public class Users implements Serializable{
     public void setPassword(String password) {
         this.password = password;
     }
-     
-     
+
+    public List<Note> getNotes() {
+        return notes;
+    }
+    public void setNotes(List<Note> notes) {
+        this.notes = notes;
+    }    
      
 }

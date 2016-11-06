@@ -1,11 +1,13 @@
 package ca2.model;
 
 import java.io.Serializable;
+import java.security.MessageDigest;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 
 /**
  *
@@ -16,7 +18,8 @@ import javax.persistence.Table;
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+   
+    
     @Id
     private String userid;
     private String password;
@@ -47,4 +50,26 @@ public class User implements Serializable {
         this.notes = notes;
     }
 
+     public String encodePassword(String password) {
+      
+       try {
+           // String password = "admin";
+
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            md.update(password.getBytes());
+
+            byte byteData[] = md.digest();
+
+            StringBuffer sb = new StringBuffer();
+            for (int i = 0; i < byteData.length; i++) {
+             sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+            }
+
+            //System.out.println("Hex format : " + sb.toString());
+            return sb.toString();
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+        return null;
+    }
 }

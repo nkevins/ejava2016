@@ -1,0 +1,22 @@
+.no-pad-bottom {
+    margin-bottom: 0;
+}
+ 
+.title {
+    font-weight: bold;
+    color: #ff6a00;
+}
+ 
+.posts li .date-posted {
+    font-size: 12px;
+    font-style: italic;
+}
+ 
+.posts li {
+    border-bottom: 1px solid #CCC;
+    padding: 15px 0;
+}
+ 
+.posts li:first-child {
+    border-top: 1px solid #CCC;
+}

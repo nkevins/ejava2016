@@ -25,7 +25,7 @@ public class NoteRoom {
                 try {
                     s.getBasicRemote().sendText(text);
                 } catch (IOException ex) { 
-                    
+                    remove(category, s);
                 }
             });
         }
@@ -36,7 +36,7 @@ public class NoteRoom {
                 try {
                     s.getBasicRemote().sendText(text);
                 } catch (IOException ex) { 
-                    
+                    remove(category, s);
                 }
             });
         }

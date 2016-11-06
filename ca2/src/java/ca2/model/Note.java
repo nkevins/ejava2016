@@ -2,6 +2,8 @@ package ca2.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -73,4 +75,13 @@ public class Note implements Serializable {
         this.user = user;
     }
     
+    public JsonObject toJson() {
+        return (Json.createObjectBuilder()
+                .add("title", title)
+                .add("category", category)
+                .add("content", content)
+                .add("user", user.getUserid())
+                .add("createdDate", createdDate.getTime())
+                .build());
+    }
 }

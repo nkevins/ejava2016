@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Notification Display</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript">
+            $(function() {
+                var socket = new WebSocket("ws://localhost:8080/ca2/note/All");
+                socket.onmessage = function(evt) {
+                    var data = JSON.parse(evt.data);
+
+                    for(var i = 0; i < data.length; i++) {
+                        var obj = data[i];
+
+                        var title = obj.title;
+                        $("#notes").val(title + "\n" + $("#notes").val());
+                    }
+                }
+            })
+        </script>
+    </head>
+    <body>
+        <textarea id="notes" cols="50" rows="10" disabled></textarea>
+    </body>
+</html>

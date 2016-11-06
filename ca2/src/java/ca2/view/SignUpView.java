@@ -5,6 +5,10 @@
  */
 package ca2.view;
 
+import ca2.business.UserBean;
+import ca2.model.Group;
+import ca2.model.User;
+import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
@@ -18,6 +22,12 @@ public class SignUpView {
     
     private String userId;
     private String password;
+    private User user = new User();
+    private Group group = new Group();
+    private String message = "";
+    private static String AUTH = "authenticated";
+    @EJB private UserBean userBean;
+
 
     public String getUserId() {
         return userId;
@@ -37,6 +47,34 @@ public class SignUpView {
     
     public void add(){
         
+        try{
+            String hashPwd = user.encodePassword(this.password);
+            user.setUserid(userId);
+            user.setPassword(hashPwd);
+           
+            group.setGroupid(AUTH);
+            group.setUserid(userId);
+            
+            userBean.save(user,group);
+            
+            setMessage("New user created successfully. Please click Login link to login into system");
+           
+        }catch(Exception ex){
+            setMessage("Failed to register users");
+            System.out.println(ex);
+        }
+        
+        
+        //System.out.println(hashPwd);
+        
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getMessage() {
+        return message;
     }
     
 }

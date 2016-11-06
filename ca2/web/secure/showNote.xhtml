@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Note Display</title>
+    </h:head>
+    <h:body>
+		<h2>Your Notes</h2>
+
+		<h2>Current list of notes</h2>
+                <h:dataTable var="t" value="#{noteView.noteList}" border="1">
+			<h:column>
+				<f:facet name="header">Title</f:facet>
+				#{t.title}
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Category</f:facet>
+				#{t.category}
+			</h:column>
+                    
+                        <h:column>
+				<f:facet name="header">Content</f:facet>
+				#{t.content}
+			</h:column>
+                    
+                     <h:column>
+				<f:facet name="header">Created Date Time</f:facet>
+				#{t.createdDate}
+			</h:column>
+
+		</h:dataTable>
+    </h:body>
+</html>
+

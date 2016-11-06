@@ -11,7 +11,15 @@
         <hr />
         <h:panelGrid columns="1">
             <h:link value="Create Note" outcome="createNote" />
+            
         </h:panelGrid>
+        <h:form>
+            
+        <h:panelGrid columns="1">
+            <h:commandLink value="Display My Note" action="#{noteView.show(userSession.username)}" />
+        </h:panelGrid>
+        </h:form>
+       
     </h:body>
 </html>
 

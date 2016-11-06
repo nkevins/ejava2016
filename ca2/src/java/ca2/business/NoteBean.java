@@ -29,4 +29,17 @@ public class NoteBean {
                 
         return (query.getResultList());
     }
+    
+    public List<Note> getNoteByUserId(String userId){
+        TypedQuery<Note> query;
+        try{
+            String selectSql = "select n from Note n where (n.user.userid = :userid)";
+            query = em.createQuery(selectSql, Note.class);
+            query.setParameter("userid", userId);
+            return (query.getResultList());
+        }catch(Exception ex){
+            System.out.println(ex);
+            return null;
+        }
+    }
 }

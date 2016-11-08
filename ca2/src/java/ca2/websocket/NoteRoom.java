@@ -5,12 +5,15 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 import javax.enterprise.context.ApplicationScoped;
 import javax.websocket.Session;
 
 @ApplicationScoped
 public class NoteRoom {
 
+    private final Lock lock = new ReentrantLock();
     private Map<String, List<Session>> rooms = new HashMap<>();
     
     public void add(String category, Session session) {
@@ -46,5 +49,10 @@ public class NoteRoom {
         if (rooms.containsKey(category)) {
             rooms.get(category).remove(session);
         }
+    }
+    
+    public void lock(Runnable block) {
+        lock.lock();
+        try { block.run(); } finally { lock.unlock(); }
     }
 }

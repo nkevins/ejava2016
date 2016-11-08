@@ -25,9 +25,10 @@ public class NoteEndpoint {
     
     @OnOpen
     public void open(Session sess, @PathParam("category") String category) {
-        rooms.add(category, sess);
+        rooms.lock(() -> { rooms.add(category, sess); });
         List<Note> notes = noteBean.getAll(category);
         
+        // Send notice history
         JsonArrayBuilder builder = Json.createArrayBuilder();
         for (Note n : notes) {
             builder.add(n.toJson());
@@ -42,11 +43,11 @@ public class NoteEndpoint {
     
     @OnMessage
     public void message(String text, @PathParam("category") String category) {
-        rooms.broadcast(category, text);
+        rooms.lock(() -> { rooms.broadcast(category, text); });
     }
     
     @OnClose
     public void close(Session session, @PathParam("category") String category) {
-        rooms.remove(category, session);
+        rooms.lock(() -> { rooms.remove(category, session); });
     }
 }

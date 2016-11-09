@@ -37,5 +37,9 @@ public class NoteView {
     @PostConstruct
     public void init() {
         noteList= noteBean.getNoteByUserId(userSession.getUsername());
-    }       
+    }    
+    
+    public void show() {
+        noteList= noteBean.getNoteByUserId(userSession.getUsername());
+    }
 }

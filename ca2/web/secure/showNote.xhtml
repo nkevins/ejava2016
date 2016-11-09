@@ -33,7 +33,9 @@
                     
                      <h:column>
 				<f:facet name="header">Created Date Time</f:facet>
-				#{t.createdDate}
+                                <h:outputText value="#{t.createdDate}" >
+                                    <f:convertDateTime pattern="dd-MMM-yyyy HH:mm" />
+                                </h:outputText>
 			</h:column>
 
 		</h:dataTable>

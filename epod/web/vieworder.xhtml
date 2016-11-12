@@ -30,13 +30,28 @@
 				<f:facet name="header">Phone</f:facet>
 				#{t.phone}
 			</h:column>
-                    
                      <h:column>
 				<f:facet name="header">Created Date Time</f:facet>
                                 <h:outputText value="#{t.createdDate}" >
-                                    <f:convertDateTime pattern="dd-MMM-yyyy HH:mm" />
+                                   <f:convertDateTime pattern="dd-MMM-yyyy hh:mm" />
                                 </h:outputText>
 			</h:column>
+                    
+                     <h:column>
+				<f:facet name="header">Pod Id</f:facet>
+				#{t.pod.podId}
+			</h:column>
+                    
+                     <h:column>
+				<f:facet name="header">Ack Id</f:facet>
+				#{t.pod.ackId}
+			</h:column>
+                     <h:column>
+				<f:facet name="header">Notes</f:facet>
+				#{t.pod.note}
+			</h:column>
+                    
+                    
 
 		</h:dataTable>
                 

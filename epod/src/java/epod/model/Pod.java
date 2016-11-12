@@ -21,6 +21,7 @@ public class Pod implements Serializable {
     private Integer podId;
    
     private String note;
+   
     
     @Lob
     private byte[] image;
@@ -36,6 +37,14 @@ public class Pod implements Serializable {
     @JoinColumn(name="pkg_id", referencedColumnName="pkg_id")
     private Delivery delivery;
 
+    public String displayStatus(){
+        if(this.ackId == null){
+            return "Pending Acknowledgment";
+        }
+        
+        return "Done";
+    }
+    
     public Integer getPodId() {
         return podId;
     }

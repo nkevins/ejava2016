@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-	  xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>My Order</title>
     </h:head>
@@ -51,6 +52,12 @@
 				#{t.pod.note}
 			</h:column>
                     
+                     <h:column>
+				<f:facet name="header">Status</f:facet>
+				 #{t.pod.displayStatus()}
+			</h:column>
+                    
+                  
                     
 
 		</h:dataTable>

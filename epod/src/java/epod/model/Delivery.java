@@ -2,13 +2,15 @@ package epod.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Temporal;
 
 @Entity
@@ -28,7 +30,7 @@ public class Delivery implements Serializable {
     private Date createdDate;
     
     @OneToOne
-    @JoinColumn(name="pkg_id")
+    @PrimaryKeyJoinColumn
     private Pod pod;
 
     public Integer getPackageId() {
@@ -72,5 +74,15 @@ public class Delivery implements Serializable {
     public void setPod(Pod pod) {
         this.pod = pod;
     }    
+    
+    public JsonObject toJSON() {        
+        return (Json.createObjectBuilder()
+                .add("teamId", "a85da9ab")
+                .add("podId", this.pod.getPodId())
+                .add("name", this.getName())
+                .add("address", this.getAddress())
+                .add("phone", this.getPhone())
+                .build());
+    }
     
 }

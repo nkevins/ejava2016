@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
@@ -19,6 +20,8 @@ public class Pod implements Serializable {
     private Integer podId;
     
     private String note;
+    
+    @Lob
     private byte[] image;
     
     @Column(name="delivery_date")

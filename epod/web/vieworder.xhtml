@@ -1,12 +1,49 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
+        <title>My Order</title>
     </h:head>
     <h:body>
-        Hello from Facelets
+        <h:form>
+		 <tr>
+                     <td><h:commandButton value="Refresh" action="#{orderView.viewOrder()}" /></td>
+                </tr>
+
+		<h2>list of delivery</h2>
+              
+                
+                <h:dataTable var="t" value="#{orderView.lst}" border="1">
+			<h:column>
+				<f:facet name="header">Name</f:facet>
+				#{t.name}
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Address</f:facet>
+				#{t.address}
+			</h:column>
+                    
+                        <h:column>
+				<f:facet name="header">Phone</f:facet>
+				#{t.phone}
+			</h:column>
+                    
+                     <h:column>
+				<f:facet name="header">Created Date Time</f:facet>
+                                <h:outputText value="#{t.createdDate}" >
+                                    <f:convertDateTime pattern="dd-MMM-yyyy HH:mm" />
+                                </h:outputText>
+			</h:column>
+
+		</h:dataTable>
+                
+                <h:panelGrid columns="1">
+                   <h:link value="Submit Delivery" outcome="makeorder" />
+                 </h:panelGrid>
+                </h:form>
     </h:body>
 </html>
 

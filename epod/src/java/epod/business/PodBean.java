@@ -1,8 +1,13 @@
 package epod.business;
 
 import epod.model.Pod;
+import java.util.Calendar;
 import java.util.Date;
+import javax.annotation.Resource;
 import javax.ejb.Stateless;
+import javax.ejb.Timeout;
+import javax.ejb.Timer;
+import javax.ejb.TimerService;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.client.Client;
@@ -22,6 +27,7 @@ import org.glassfish.jersey.media.multipart.MultiPartFeature;
 public class PodBean {
     
     @PersistenceContext private EntityManager em;
+    @Resource TimerService timerService;
     
     public void uploadPod(Integer podId, String note, byte[] img) {
         Pod pod = em.find(Pod.class, podId);
@@ -70,6 +76,38 @@ public class PodBean {
 	Response callResp = inv.post(Entity.entity(formData, formData.getMediaType()));
 
 	System.out.println(">> call resp:" + callResp.getStatus());
+    }
+    
+    public void createAckChecking(int podId) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.SECOND, 30);
+        Date checkingTime = calendar.getTime();
+        timerService.createTimer(checkingTime, podId);
+        
+        System.out.println(">> start 30 second timer for:" + podId);
+    }
+    
+    @Timeout
+    public void checkAck(Timer timer) {
+        int podId = (int)timer.getInfo();
+        System.out.println(">> timer timeout for:" + podId);
+        Pod pod = em.find(Pod.class, podId);
+        if (pod.getAckId().isEmpty()) {
+            notifyHq(pod);
+            System.out.println(">> re notify for:" + podId);
+        } else {
+            cancelAckCheck(podId);
+        }
+    }
+    
+    public void cancelAckCheck(int podId) {
+        for (Timer t: timerService.getTimers()) {
+            if ((int)t.getInfo() == podId) {
+                t.cancel();
+                System.out.println(">> cancel timer for:" + podId);
+                return;
+            }
+        }
     }
     
 }

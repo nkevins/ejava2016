@@ -67,6 +67,7 @@ public class MakeOrderView {
              objDeliver.setPhone(this.phone);
              
              bean.saveOrder(objDeliver);
+              setMessage("Order submitted successfully");
              
          }catch(Exception ex){
               setMessage("Failed to submit order");

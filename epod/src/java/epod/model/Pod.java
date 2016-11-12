@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -18,7 +19,7 @@ public class Pod implements Serializable {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="pod_id")
     private Integer podId;
-    
+   
     private String note;
     
     @Lob
@@ -30,8 +31,9 @@ public class Pod implements Serializable {
     
     @Column(name="ack_id")
     private String ackId;
-    
-    @OneToOne(mappedBy="pod")
+        
+    @OneToOne
+    @JoinColumn(name="pkg_id", referencedColumnName="pkg_id")
     private Delivery delivery;
 
     public Integer getPodId() {

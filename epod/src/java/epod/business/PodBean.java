@@ -85,18 +85,18 @@ public class PodBean {
         Date checkingTime = calendar.getTime();
         timerService.createTimer(checkingTime, podId);
         
-        System.out.println(">> start 30 second timer for:" + podId);
+        System.out.println(">> start 30 second timer for podId:" + podId);
     }
     
     @Timeout
     public void checkAck(Timer timer) {
         int podId = (int)timer.getInfo();
-        System.out.println(">> timer timeout for:" + podId);
+        System.out.println(">> timer timeout for podId:" + podId);
         Pod pod = em.find(Pod.class, podId);
         em.refresh(pod);
         if (pod.getAckId() == null || pod.getAckId().isEmpty()) {
+            System.out.println(">> re notify for podId:" + podId);
             notifyHq(pod);
-            System.out.println(">> re notify for:" + podId);
         } else {
             cancelAckCheck(podId);
         }
@@ -105,8 +105,8 @@ public class PodBean {
     public void cancelAckCheck(int podId) {
         for (Timer t: timerService.getTimers()) {
             if ((int)t.getInfo() == podId) {
+                System.out.println(">> cancel timer for podId:" + podId);
                 t.cancel();
-                System.out.println(">> cancel timer for:" + podId);
                 return;
             }
         }

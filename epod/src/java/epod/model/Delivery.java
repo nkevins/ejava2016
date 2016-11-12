@@ -4,13 +4,13 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.json.Json;
 import javax.json.JsonObject;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Temporal;
 
 @Entity
@@ -29,8 +29,7 @@ public class Delivery implements Serializable {
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date createdDate;
     
-    @OneToOne
-    @PrimaryKeyJoinColumn
+    @OneToOne(mappedBy="delivery",cascade = CascadeType.PERSIST)
     private Pod pod;
 
     public Integer getPackageId() {

@@ -1,6 +1,7 @@
 package epod.business;
 
 import epod.model.Delivery;
+import epod.model.Pod;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -19,4 +20,20 @@ public class DeliveryBean {
         return query.getResultList();
     }
     
+    public void saveOrder(Delivery objDeliver){
+        em.persist(objDeliver);
+        em.flush();
+        
+
+        //Delivery del = em.find(Delivery.class, objDeliver.getPackageId());
+        
+        Pod pod = new Pod();
+        objDeliver.setPod(pod);
+        
+        em.persist(objDeliver);
+        em.flush();
+        
+       // em.refresh(objDeliver);
+        //em.persist(objPod);
+    }
 }

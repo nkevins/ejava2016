@@ -67,7 +67,7 @@ public class MakeOrderView {
              objDeliver.setPhone(this.phone);
              
              bean.saveOrder(objDeliver);
-              setMessage("Order submitted successfully");
+              setMessage("Order submitted successfully. Pod ID: " + objDeliver.getPod().getPodId());
              
          }catch(Exception ex){
               setMessage("Failed to submit order");

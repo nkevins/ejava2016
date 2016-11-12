@@ -1,53 +1,54 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
 
-<h:head>
-    <title>Delivery</title>
-</h:head>
-<h:body>
-    <f:view>
-        <h:form>
-             <tr>
-                 <td><h:outputText value="#{makeOrderView.message}" style="color:red" /></td>
-                     
-                </tr>
-            <table>
-               
+    <h:head>
+        <title>Delivery</title>
+    </h:head>
+    <h:body>
+        <f:view>
+            <h2>Customer Entries</h2>
+            <h:form>
                 <tr>
-                    <td><h:outputText value="Name:" /></td>
-                    <td><h:inputText id="fname" value="#{makeOrderView.name}"
-                            required="true" requiredMessage="Please enter your name" /></td>
-                    <td><h:message for="fname" style="color:red" /></td>
+                    <td><h:outputText value="#{makeOrderView.message}" style="color:red" /></td>
+
                 </tr>
-                <tr>
-                    <td><h:outputText value="Address:" /></td>
-                    <td><h:inputText id="lname" value="#{makeOrderView.address}"
-                            required="true" requiredMessage="Please enter your address" /></td>
-                    <td><h:message for="lname" style="color:red" /></td>
-                </tr>
-                
-                 <tr>
-                    <td><h:outputText value="Phone:" /></td>
-                    <td><h:inputText id="phone" value="#{makeOrderView.phone}"
-                            required="true" requiredMessage="Please enter your phone" /></td>
-                    <td><h:message for="phone" style="color:red" /></td>
-                </tr>
-                
-                <tr>
-                    <td />
-                    <td><h:commandButton value="Submit" action="#{makeOrderView.add()}" /></td>
-                </tr>
-               
-            </table>
-            
-             <h:panelGrid columns="1">
-            <h:link value="Display My Delivery" outcome="vieworder" />
-        </h:panelGrid>
-        </h:form>
-    </f:view>
-</h:body>
+                <table>
+
+                    <tr>
+                        <td><h:outputText value="Name:" /></td>
+                        <td><h:inputText id="fname" value="#{makeOrderView.name}"
+                                         required="true" requiredMessage="Please enter your name" /></td>
+                        <td><h:message for="fname" style="color:red" /></td>
+                    </tr>
+                    <tr>
+                        <td><h:outputText value="Address:" /></td>
+                        <td><h:inputText id="lname" value="#{makeOrderView.address}"
+                                         required="true" requiredMessage="Please enter your address" /></td>
+                        <td><h:message for="lname" style="color:red" /></td>
+                    </tr>
+
+                    <tr>
+                        <td><h:outputText value="Phone:" /></td>
+                        <td><h:inputText id="phone" value="#{makeOrderView.phone}"
+                                         required="true" requiredMessage="Please enter your phone" /></td>
+                        <td><h:message for="phone" style="color:red" /></td>
+                    </tr>
+
+                    <tr>
+                        <td />
+                        <td><h:commandButton value="Submit" action="#{makeOrderView.add()}" /></td>
+                    </tr>
+
+                </table>
+
+                <h:panelGrid columns="1">
+                    <h:link value="Main Menu" outcome="index" />
+                </h:panelGrid>
+            </h:form>
+        </f:view>
+    </h:body>
 </html>

@@ -2,76 +2,82 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>My Order</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </h:head>
     <h:body>
         <h:form>
-		 <tr>
-                     <td><h:commandButton value="Refresh" action="#{orderView.viewOrder()}" /></td>
-                </tr>
+            <tr>
+                <td><h:commandButton value="Refresh" action="#{orderView.viewOrder()}" /></td>
+            </tr>
 
-		<h2>list of delivery</h2>
-              
-                <div class="table-responsive">
-                    <table class="table">
-                <h:dataTable var="t" value="#{orderView.lst}" border="1">
-                     <h:column>
-				<f:facet name="header">Pod Id</f:facet>
-				#{t.pod.podId}
-			</h:column>
-			<h:column>
-				<f:facet name="header">Name</f:facet>
-				#{t.name}
-			</h:column>
+            <h2>List of Delivery</h2>
 
-			<h:column>
-				<f:facet name="header">Address</f:facet>
-				#{t.address}
-			</h:column>
-                    
+            <div class="table-responsive">
+                <table class="table">
+                    <h:dataTable var="t" value="#{orderView.lst}" border="1">
                         <h:column>
-				<f:facet name="header">Phone</f:facet>
-				#{t.phone}
-			</h:column>
-                     <h:column>
-				<f:facet name="header">Created Date Time</f:facet>
-                                <h:outputText value="#{t.createdDate}" >
-                                   <f:convertDateTime pattern="dd-MMM-yyyy hh:mm" />
-                                </h:outputText>
-			</h:column>
-                    
-                    
-                    
-                     <h:column>
-				<f:facet name="header">Ack Id</f:facet>
-				#{t.pod.ackId}
-			</h:column>
-                     <h:column>
-				<f:facet name="header">Notes</f:facet>
-				#{t.pod.note}
-			</h:column>
-                    
-                     <h:column>
-				<f:facet name="header">Status</f:facet>
-				 #{t.pod.displayStatus()}
-			</h:column>
-                    
-                  
-                    
+                            <f:facet name="header">Pod Id</f:facet>
+                                #{t.pod.podId}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Name</f:facet>
+                                #{t.name}
+                        </h:column>
 
-		</h:dataTable>
+                        <h:column>
+                            <f:facet name="header">Address</f:facet>
+                                #{t.address}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Phone</f:facet>
+                                #{t.phone}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Created Date Time</f:facet>
+                            <h:outputText value="#{t.createdDate}" >
+                                <f:convertDateTime pattern="dd-MMM-yyyy hh:mm:ss" />
+                            </h:outputText>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Delivery Date Time</f:facet>
+                            <h:outputText value="#{t.pod.deliveryDate}" >
+                                <f:convertDateTime pattern="dd-MMM-yyyy hh:mm:ss" />
+                            </h:outputText>
+                        </h:column>
+
+
+
+                        <h:column>
+                            <f:facet name="header">Ack Id</f:facet>
+                                #{t.pod.ackId}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Notes</f:facet>
+                                #{t.pod.note}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Status</f:facet>
+                                #{t.pod.displayStatus()}
+                        </h:column>
+
+
+
+
+                    </h:dataTable>
                 </table>
-                    </div>
-                <h:panelGrid columns="1">
-                   <h:link value="Main Menu" outcome="index" />
-                 </h:panelGrid>
-                </h:form>
+            </div>
+            <h:panelGrid columns="1">
+                <h:link value="Main Menu" outcome="index" />
+            </h:panelGrid>
+        </h:form>
     </h:body>
 </html>
 

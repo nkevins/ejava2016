@@ -10,31 +10,30 @@ import javax.persistence.TypedQuery;
 
 @Stateless
 public class DeliveryBean {
-    
-    @PersistenceContext private EntityManager em;
-    
+
+    @PersistenceContext
+    private EntityManager em;
+
     public List<Delivery> getAllDelivery() {
         String queryString = "select d from Delivery d";
         TypedQuery<Delivery> query = em.createQuery(queryString, Delivery.class);
-        
+
         return query.getResultList();
     }
-    
-    public void saveOrder(Delivery objDeliver){
+
+    public void saveOrder(Delivery objDeliver) {
         em.persist(objDeliver);
         //em.flush();
-        
 
         //Delivery del = em.find(Delivery.class, objDeliver.getPackageId());
-        
         Pod pod = new Pod();
         objDeliver.setPod(pod);
         pod.setDelivery(objDeliver);
-                
+
         em.persist(objDeliver);
-        //em.flush();
-        
-       // em.refresh(objDeliver);
+        em.flush();
+
+        em.refresh(objDeliver);
         //em.persist(objPod);
     }
 }

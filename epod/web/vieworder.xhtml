@@ -47,7 +47,7 @@
 
                         <h:column>
                             <f:facet name="header">Delivery Date Time</f:facet>
-                            <h:outputText value="#{t.pod.deliveryDate}" >
+                            <h:outputText value="#{t.pod.deliveryDate}" rendered="#{t.pod.displayStatus()=='Done'}">
                                 <f:convertDateTime pattern="dd-MMM-yyyy hh:mm:ss" />
                             </h:outputText>
                         </h:column>

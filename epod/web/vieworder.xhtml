@@ -17,6 +17,10 @@
               
                 
                 <h:dataTable var="t" value="#{orderView.lst}" border="1">
+                     <h:column>
+				<f:facet name="header">Pod Id</f:facet>
+				#{t.pod.podId}
+			</h:column>
 			<h:column>
 				<f:facet name="header">Name</f:facet>
 				#{t.name}
@@ -38,10 +42,7 @@
                                 </h:outputText>
 			</h:column>
                     
-                     <h:column>
-				<f:facet name="header">Pod Id</f:facet>
-				#{t.pod.podId}
-			</h:column>
+                    
                     
                      <h:column>
 				<f:facet name="header">Ack Id</f:facet>
@@ -63,7 +64,7 @@
 		</h:dataTable>
                 
                 <h:panelGrid columns="1">
-                   <h:link value="Submit Delivery" outcome="makeorder" />
+                   <h:link value="Main Menu" outcome="index" />
                  </h:panelGrid>
                 </h:form>
     </h:body>

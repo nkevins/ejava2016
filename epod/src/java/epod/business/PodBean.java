@@ -97,7 +97,6 @@ public class PodBean {
         if (pod.getAckId() == null || pod.getAckId().isEmpty()) {
             notifyHq(pod);
             System.out.println(">> re notify for:" + podId);
-            createAckChecking(podId);
         } else {
             cancelAckCheck(podId);
         }

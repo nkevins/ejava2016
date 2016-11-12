@@ -22,16 +22,17 @@ public class DeliveryBean {
     
     public void saveOrder(Delivery objDeliver){
         em.persist(objDeliver);
-        em.flush();
+        //em.flush();
         
 
         //Delivery del = em.find(Delivery.class, objDeliver.getPackageId());
         
         Pod pod = new Pod();
         objDeliver.setPod(pod);
-        
+        pod.setDelivery(objDeliver);
+                
         em.persist(objDeliver);
-        em.flush();
+        //em.flush();
         
        // em.refresh(objDeliver);
         //em.persist(objPod);

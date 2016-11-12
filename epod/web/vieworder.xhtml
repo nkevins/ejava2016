@@ -6,6 +6,9 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>My Order</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </h:head>
     <h:body>
         <h:form>
@@ -15,7 +18,8 @@
 
 		<h2>list of delivery</h2>
               
-                
+                <div class="table-responsive">
+                    <table class="table">
                 <h:dataTable var="t" value="#{orderView.lst}" border="1">
                      <h:column>
 				<f:facet name="header">Pod Id</f:facet>
@@ -62,7 +66,8 @@
                     
 
 		</h:dataTable>
-                
+                </table>
+                    </div>
                 <h:panelGrid columns="1">
                    <h:link value="Main Menu" outcome="index" />
                  </h:panelGrid>

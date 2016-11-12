@@ -76,6 +76,7 @@ public class PodBean {
 	Response callResp = inv.post(Entity.entity(formData, formData.getMediaType()));
 
 	System.out.println(">> call resp:" + callResp.getStatus());
+        createAckChecking(pod.getPodId());
     }
     
     public void createAckChecking(int podId) {
@@ -92,9 +93,11 @@ public class PodBean {
         int podId = (int)timer.getInfo();
         System.out.println(">> timer timeout for:" + podId);
         Pod pod = em.find(Pod.class, podId);
-        if (pod.getAckId().isEmpty()) {
+        em.refresh(pod);
+        if (pod.getAckId() == null || pod.getAckId().isEmpty()) {
             notifyHq(pod);
             System.out.println(">> re notify for:" + podId);
+            createAckChecking(podId);
         } else {
             cancelAckCheck(podId);
         }
